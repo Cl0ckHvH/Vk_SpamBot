@@ -79,7 +79,7 @@ async def echo_message(msg: types.Message, _):
                 random_id=random.getrandbits(31) * random.choice([-1, 1]),
                 peer_id=msg.peer_id,
                 message=config["message_text"],
-                attachment=config["picture"],
+                attachment=config["attachment"],
                 keyboard=keyboard.get_keyboard(),
             )
             sent_message_count += 1
