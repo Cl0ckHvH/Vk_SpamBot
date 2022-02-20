@@ -17,10 +17,6 @@
     },
     "picture": {
       "description": "Отправляет картинку"
-    },
-    "delay": {
-      "description": "Интервал перед следующей отправкой",
-      "value": "1.0"
     }
   },
   "buildpacks": [
