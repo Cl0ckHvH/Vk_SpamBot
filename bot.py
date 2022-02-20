@@ -66,10 +66,10 @@ async def echo_message(msg: types.Message, _):
             for row in range(0, 10):
                 button_colors = deque(
                     [
-                        ButtonColor.POSITIVE,
                         ButtonColor.NEGATIVE,
-                        ButtonColor.SECONDARY,
-                        ButtonColor.PRIMARY,
+                        ButtonColor.NEGATIVE,
+                        ButtonColor.NEGATIVE,
+                        ButtonColor.NEGATIVE,
                     ]
                 )
                 button_colors.rotate(sent_message_count % len(button_colors))
