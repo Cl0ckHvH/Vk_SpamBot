@@ -75,6 +75,8 @@ async def echo_message(msg: types.Message, _):
                     keyboard.add_text_button(
                         config["buttons_text"], color=button_colors[button]
                     )
+                if row != 9:
+                    keyboard.add_row()
             await api.messages.send(
                 random_id=random.getrandbits(31) * random.choice([-1, 1]),
                 peer_id=msg.peer_id,
