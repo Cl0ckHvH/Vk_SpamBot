@@ -88,7 +88,7 @@ async def echo_message(msg: types.Message, _):
                 keyboard=keyboard.get_keyboard(),
             )
             sent_message_count += 1
-            await asyncio.sleep(int(config["delay"]))
+            await asyncio.sleep(float(config["delay"]))
         except APIException as e:
             logging.info(f"Stopped raiding {msg.peer_id}. Reason: {e}")
             await asyncio.sleep(10)
