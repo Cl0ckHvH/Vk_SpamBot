@@ -10,6 +10,7 @@ from vk import types
 from vk.bot_framework import Dispatcher, get_group_id
 from vk.exceptions import APIException
 from vk.keyboards import ButtonColor
+from vk.keyboards import ButtonType
 from vk.keyboards import Keyboard
 from vk.types import message
 from vk.utils import TaskManager
@@ -73,7 +74,9 @@ async def echo_message(msg: types.Message, _):
                 button_colors.rotate(sent_message_count % len(button_colors))
                 for button in range(0, 4):
                     keyboard.add_text_button(
-                        config["buttons_text"], color=button_colors[button]
+                        config["buttons_text"], 
+                        color=button_colors[button],
+                        payload=None
                     )
                 if row != 9:
                     keyboard.add_row()
