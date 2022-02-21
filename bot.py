@@ -58,9 +58,17 @@ async def apply_required_settings(group_id: int):
         {"group_id": group_id, "enabled": 1, "api_version": "5.103", "message_new": 1},
     )
 
+call_bot = int(config["call_by@"])
 
-@dp.message_handler()
-async def echo_message(msg: types.Message, _):
+if call_bot == 1:
+    message_handler_text = "chat_action=message.Action.chat_invite_user",
+    type_of_message = "chat_invite_user"
+else:
+    message_handler_text = "",
+    type_of_message = "echo_message"
+ 
+@dp.message_handler(message_handler_text)
+async def type_of_message(msg: types.Message, _):
     logging.info(f"Started raiding {msg.peer_id}.")
     sent_message_count = 0
     while True:
