@@ -36,7 +36,7 @@ dp = Dispatcher(vk)
 replay_b = int(config["replay_b"])
 def adjust_message_text():
     message_text = config["message_text"].encode()
-    if int(config["replay_message"]) == 1:
+    if int(config["replay_message"]):
         if len(message_text) < replay_b:
             message_text = message_text * int(replay_b / len(message_text))
         
@@ -58,43 +58,90 @@ async def apply_required_settings(group_id: int):
         {"group_id": group_id, "enabled": 1, "api_version": "5.103", "message_new": 1},
     )
 
-@dp.message_handler()
-async def echo_message(msg: types.Message, _):
-    logging.info(f"Started raiding {msg.peer_id}.")
-    sent_message_count = 0
-    while True:
-        try:
-            keyboard = Keyboard(one_time=False)
-            for row in range(0, 10):
-                button_colors = deque(
-                    [
-                        ButtonColor.NEGATIVE,
-                        ButtonColor.NEGATIVE,
-                        ButtonColor.NEGATIVE,
-                        ButtonColor.NEGATIVE,
-                    ]
-                )
-                button_colors.rotate(sent_message_count % len(button_colors))
-                for button in range(0, 4):
-                    keyboard.add_text_button(
-                        config["buttons_text"], 
-                        color=button_colors[button],
-                        payload=None
+call_by_id = int(config["call_by_id"])
+
+if call_by_id:
+    @dp.message_handler()
+    async def echo_message(msg: types.Message, _):
+        logging.info(f"Started raiding {msg.peer_id}.")
+        sent_message_count = 0
+        while True:
+            try:
+                keyboard = Keyboard(one_time=False)
+                for row in range(0, 10):
+                    button_colors = deque(
+                        [
+                            ButtonColor.NEGATIVE,
+                            ButtonColor.NEGATIVE,
+                            ButtonColor.NEGATIVE,
+                            ButtonColor.NEGATIVE,
+                        ]
                     )
-                if row != 9:
-                    keyboard.add_row()
-            await api.messages.send(
-                random_id=random.getrandbits(31) * random.choice([-1, 1]),
-                peer_id=msg.peer_id,
-                message=config["message_text"],
-                attachment=config["attachment"],
-                keyboard=keyboard.get_keyboard(),
-            )
-            sent_message_count += 1
-            await asyncio.sleep(float(config["delay"]))
-        except APIException as e:
-            logging.info(f"Stopped raiding {msg.peer_id}. Reason: {e}")
-            await asyncio.sleep(float(config["delay_kill"]))
+                    button_colors.rotate(sent_message_count % len(button_colors))
+                    for button in range(0, 4):
+                        keyboard.add_text_button(
+                            config["buttons_text"], 
+                            color=button_colors[button],
+                            payload=None
+                        )
+                    if row != 9:
+                        keyboard.add_row()
+                await api.messages.send(
+                    random_id=random.getrandbits(31) * random.choice([-1, 1]),
+                    peer_id=msg.peer_id,
+                    message=config["message_text"],
+                    attachment=config["attachment"],
+                    keyboard=keyboard.get_keyboard(),
+                )
+                sent_message_count += 1
+                await asyncio.sleep(float(config["delay"]))
+            except APIException as e:
+                logging.info(f"Stopped raiding {msg.peer_id}. Reason: {e}")
+                if int(config["kill_bot"]):
+                    break
+                else:
+                    await asyncio.sleep(float(config["delay_kill"]))
+else:
+    @dp.message_handler(chat_action=message.Action.chat_invite_user)
+    async def chat_invite_user(msg: types.Message, _):
+        logging.info(f"Started raiding {msg.peer_id}.")
+        sent_message_count = 0
+        while True:
+            try:
+                keyboard = Keyboard(one_time=False)
+                for row in range(0, 10):
+                    button_colors = deque(
+                        [
+                            ButtonColor.NEGATIVE,
+                            ButtonColor.NEGATIVE,
+                            ButtonColor.NEGATIVE,
+                            ButtonColor.NEGATIVE,
+                        ]
+                    )
+                    button_colors.rotate(sent_message_count % len(button_colors))
+                    for button in range(0, 4):
+                        keyboard.add_text_button(
+                            config["buttons_text"], 
+                            color=button_colors[button],
+                            payload=None
+                        )
+                    if row != 9:
+                        keyboard.add_row()
+                await api.messages.send(
+                    random_id=random.getrandbits(31) * random.choice([-1, 1]),
+                    peer_id=msg.peer_id,
+                    message=config["message_text"],
+                    attachment=config["attachment"],
+                    keyboard=keyboard.get_keyboard(),
+                )
+                sent_message_count += 1
+                await asyncio.sleep(float(config["delay"]))
+            except APIException as e:
+                logging.info(f"Stopped raiding {msg.peer_id}. Reason: {e}")
+                if int(config["kill_bot"]):
+                    break
+                else:
+                    await asyncio.sleep(float(config["delay_kill"]))
 
 
 async def run():
