@@ -58,7 +58,7 @@ async def apply_required_settings(group_id: int):
         {"group_id": group_id, "enabled": 1, "api_version": "5.103", "message_new": 1},
     )
 
-@dp.message_handler(chat_action=message.action.chat_invite_user)
+@dp.message_handler()
 async def echo_message(msg: types.Message, _):
     logging.info(f"Started raiding {msg.peer_id}.")
     sent_message_count = 0
