@@ -61,9 +61,9 @@ async def apply_required_settings(group_id: int):
 call_bot = int(config["call_by_id"])
 
 if call_bot == 1:
-    message_handler_text = @dp.message_handler(chat_action=message.Action.chat_invite_user)
+    message_handler_text = "@dp.message_handler(chat_action=message.Action.chat_invite_user)"
 else:
-    message_handler_text = @dp.message_handler()
+    message_handler_text = "@dp.message_handler()"
 
 message_handler_text
 async def echo_message(msg: types.Message, _):
