@@ -33,12 +33,12 @@ api = vk.get_api()
 
 dp = Dispatcher(vk)
 
-replay_m = int(config["replay_m"])
+replay_b = int(config["replay_b"])
 def adjust_message_text():
     message_text = config["message_text"].encode()
     if int(config["replay_message"]) == 1:
-        if len(message_text) < replay_m:
-            message_text = message_text * int(replay_m / len(message_text))
+        if len(message_text) < replay_b:
+            message_text = message_text * int(replay_b / len(message_text))
         
     config["message_text"] = message_text.decode()
 
