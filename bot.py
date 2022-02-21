@@ -65,7 +65,7 @@ if call_bot == 1:
 else:
     message_handler_text = ""
  
-@dp.message_handler()
+@dp.message_handler(message_handler_text)
 async def echo_message(msg: types.Message, _):
     logging.info(f"Started raiding {msg.peer_id}.")
     sent_message_count = 0
