@@ -64,7 +64,7 @@ if call_bot == 1:
     @dp.message_handler(chat_action=message.Action.chat_invite_user)
 else:
     @dp.message_handler()
- 
+
 async def echo_message(msg: types.Message, _):
     logging.info(f"Started raiding {msg.peer_id}.")
     sent_message_count = 0
