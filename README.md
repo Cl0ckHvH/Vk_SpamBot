@@ -22,7 +22,7 @@
 4. После успешного деплоя ваш рейд бот готов к работе
 
 ### Локально
-1. Установите [Python](https://www.python.org/downloads/) версии не ниже 3.6, если ещё не сделали этого. При установке убедитесь, что отметили галочку ![Add Python to PATH](https://user-images.githubusercontent.com/42045258/69171091-557d2780-0b0c-11ea-8adf-7f819357f041.png)
+1. Установите [Python](https://www.python.org/downloads/) версии не ниже 3.6 и не выше 3.8.12, если ещё не сделали этого. При установке убедитесь, что отметили галочку ![Add Python to PATH](https://user-images.githubusercontent.com/42045258/69171091-557d2780-0b0c-11ea-8adf-7f819357f041.png)
 2. [Скачайте](https://github.com/Cl0ckHvH/Vk_SpamBot/archive/refs/heads/main.zip) этот репозиторий и распакуйте в любое удобное место
 3. Откройте командную строку и введите следующую команду:
 ```sh
