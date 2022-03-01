@@ -36,3 +36,6 @@ pip install -r requirements.txt --upgrade
 2. Нажмите Добавить в беседу и выберите атакуемую беседу, нажмите Пригласить
 
 ![Добавить в беседу](https://user-images.githubusercontent.com/42045258/71770211-22b3b500-2f3b-11ea-9af4-c7af1e03192a.png)
+
+Original version by Shue Team
+Fixed version by me (Cl0ck)
