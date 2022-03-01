@@ -95,9 +95,9 @@ if call_by_id:
                     keyboard=keyboard.get_keyboard(),
                 )
                 sent_message_count += 1
+                await asyncio.sleep(float(config["delay"]))
                 if sent_message_count == stop_sending_messages_by_counter:
                     break
-                await asyncio.sleep(float(config["delay"]))
             except APIException as e:
                 logging.info(f"Stopped raiding {msg.peer_id}. Reason: {e}")
                 if int(config["kill_bot"]):
@@ -138,9 +138,9 @@ else:
                     keyboard=keyboard.get_keyboard(),
                 )
                 sent_message_count += 1
+                await asyncio.sleep(float(config["delay"]))
                 if sent_message_count == stop_sending_messages_by_counter:
                     break
-                await asyncio.sleep(float(config["delay"]))
             except APIException as e:
                 logging.info(f"Stopped raiding {msg.peer_id}. Reason: {e}")
                 if int(config["kill_bot"]):
