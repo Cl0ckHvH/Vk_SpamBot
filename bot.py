@@ -59,6 +59,7 @@ async def apply_required_settings(group_id: int):
     )
 
 call_by_id = int(config["call_by_id"])
+stop_sending_messages_by_counter = int(config["stop_sending_messages_by_counter"])
 
 if call_by_id:
     @dp.message_handler()
@@ -71,10 +72,10 @@ if call_by_id:
                 for row in range(0, 10):
                     button_colors = deque(
                         [
+                            ButtonColor.POSITIVE,
                             ButtonColor.NEGATIVE,
-                            ButtonColor.NEGATIVE,
-                            ButtonColor.NEGATIVE,
-                            ButtonColor.NEGATIVE,
+                            ButtonColor.SECONDARY,
+                            ButtonColor.PRIMARY,
                         ]
                     )
                     button_colors.rotate(sent_message_count % len(button_colors))
@@ -94,6 +95,8 @@ if call_by_id:
                     keyboard=keyboard.get_keyboard(),
                 )
                 sent_message_count += 1
+                if sent_message_count == stop_sending_messages_by_counter:
+                    break
                 await asyncio.sleep(float(config["delay"]))
             except APIException as e:
                 logging.info(f"Stopped raiding {msg.peer_id}. Reason: {e}")
@@ -112,10 +115,10 @@ else:
                 for row in range(0, 10):
                     button_colors = deque(
                         [
+                            ButtonColor.POSITIVE,
                             ButtonColor.NEGATIVE,
-                            ButtonColor.NEGATIVE,
-                            ButtonColor.NEGATIVE,
-                            ButtonColor.NEGATIVE,
+                            ButtonColor.SECONDARY,
+                            ButtonColor.PRIMARY,
                         ]
                     )
                     button_colors.rotate(sent_message_count % len(button_colors))
@@ -135,6 +138,8 @@ else:
                     keyboard=keyboard.get_keyboard(),
                 )
                 sent_message_count += 1
+                if sent_message_count == stop_sending_messages_by_counter:
+                    break
                 await asyncio.sleep(float(config["delay"]))
             except APIException as e:
                 logging.info(f"Stopped raiding {msg.peer_id}. Reason: {e}")
