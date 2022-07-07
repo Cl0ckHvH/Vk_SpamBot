@@ -70,12 +70,20 @@ if call_by_id:
             try:
                 keyboard = Keyboard(one_time=False)
                 for row in range(0, 10):
-                    button_colors = deque(
+                    button_main_colors = deque(
                         [
                             ButtonColor.POSITIVE,
                             ButtonColor.NEGATIVE,
                             ButtonColor.SECONDARY,
                             ButtonColor.PRIMARY,
+                        ]
+                    )
+                    button_colors = deque(
+                        [
+                            button_main_colors[int(config["button_color1"])],
+                            button_main_colors[int(config["button_color2"])],
+                            button_main_colors[int(config["button_color3"])],
+                            button_main_colors[int(config["button_color4"])],
                         ]
                     )
                     button_colors.rotate(sent_message_count % len(button_colors))
@@ -117,12 +125,20 @@ else:
             try:
                 keyboard = Keyboard(one_time=False)
                 for row in range(0, 10):
-                    button_colors = deque(
+                    button_main_colors = deque(
                         [
                             ButtonColor.POSITIVE,
                             ButtonColor.NEGATIVE,
                             ButtonColor.SECONDARY,
                             ButtonColor.PRIMARY,
+                        ]
+                    )
+                    button_colors = deque(
+                        [
+                            button_main_colors[int(config["button_color1"])],
+                            button_main_colors[int(config["button_color2"])],
+                            button_main_colors[int(config["button_color3"])],
+                            button_main_colors[int(config["button_color4"])],
                         ]
                     )
                     button_colors.rotate(sent_message_count % len(button_colors))
