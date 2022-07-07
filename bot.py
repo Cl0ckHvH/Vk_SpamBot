@@ -88,20 +88,16 @@ if call_by_id:
                     if row != 9:
                         keyboard.add_row()
                 if int(config["buttons_enable"]):
-                    await api.messages.send(
-                        random_id=random.getrandbits(31) * random.choice([-1, 1]),
-                        peer_id=msg.peer_id,
-                        message=config["message_text"],
-                        attachment=config["attachment"],
-                        keyboard=keyboard.get_keyboard(),
-                    )
+                    keyboard_switch = keyboard.get_keyboard()
                 else:
-                    await api.messages.send(
-                        random_id=random.getrandbits(31) * random.choice([-1, 1]),
-                        peer_id=msg.peer_id,
-                        message=config["message_text"],
-                        attachment=config["attachment"],
-                    )
+                    keyboard_switch = ""
+                await api.messages.send(
+                    random_id=random.getrandbits(31) * random.choice([-1, 1]),
+                    peer_id=msg.peer_id,
+                    message=config["message_text"],
+                    attachment=config["attachment"],
+                    keyboard=keyboard_switch,
+                )
                 sent_message_count += 1
                 await asyncio.sleep(float(config["delay"]))
                 if sent_message_count == stop_sending_messages_by_counter:
@@ -139,20 +135,16 @@ else:
                     if row != 9:
                         keyboard.add_row()
                 if int(config["buttons_enable"]):
-                    await api.messages.send(
-                        random_id=random.getrandbits(31) * random.choice([-1, 1]),
-                        peer_id=msg.peer_id,
-                        message=config["message_text"],
-                        attachment=config["attachment"],
-                        keyboard=keyboard.get_keyboard(),
-                    )
+                    keyboard_switch = keyboard.get_keyboard()
                 else:
-                    await api.messages.send(
-                        random_id=random.getrandbits(31) * random.choice([-1, 1]),
-                        peer_id=msg.peer_id,
-                        message=config["message_text"],
-                        attachment=config["attachment"],
-                    )
+                    keyboard_switch = ""
+                await api.messages.send(
+                    random_id=random.getrandbits(31) * random.choice([-1, 1]),
+                    peer_id=msg.peer_id,
+                    message=config["message_text"],
+                    attachment=config["attachment"],
+                    keyboard=keyboard_switch,
+                )
                 sent_message_count += 1
                 await asyncio.sleep(float(config["delay"]))
                 if sent_message_count == stop_sending_messages_by_counter:
