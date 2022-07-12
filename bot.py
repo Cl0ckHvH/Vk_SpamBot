@@ -85,10 +85,19 @@ async def chat_invite_user(msg: types.Message, _):
                         button_main_colors[int(config["button_color4"])],
                     ]
                 )
+                button_text = deque (
+                    [
+                        config["button_text1"],
+                        config["button_text2"],
+                        config["button_text3"],
+                        config["button_text4"],
+                    ]
+                )
                 button_colors.rotate(sent_message_count % len(button_colors))
+                button_text.rotate(sent_message_count % len(button_colors))
                 for button in range(0, 4):
                     keyboard.add_text_button(
-                        config["buttons_text"], 
+                        button_text[button], 
                         color=button_colors[button],
                         payload=None
                     )
