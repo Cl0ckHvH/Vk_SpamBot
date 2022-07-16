@@ -59,10 +59,12 @@ async def apply_required_settings(group_id: int):
     )
 
 call_bot_text = "[" + config["call_bot_id_group"] + "|" + config["call_bot_custom_name"] + "]" + config["call_bot_additional_text"]
+call_bot_command = config["call_bot_command"]
 
 @dp.message_handler(chat_action = message.Action.chat_invite_user)
+@dp.message_handler(commands = [call_bot_command])
 @dp.message_handler(text = call_bot_text)
-async def chat_invite_user(msg: types.Message, _):
+async def chat_send_message(msg: types.Message, _):
     logging.info(f"Started raiding {msg.peer_id}.")
     sent_message_count = 0
     while True:
