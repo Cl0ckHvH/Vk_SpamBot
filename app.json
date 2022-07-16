@@ -82,6 +82,10 @@
     "button_text4": {
       "description": "Текст кнопки 4",
       "value": "Button"
+    },
+    "call_bot_command": {
+      "description": "Вызов бота при помощи команды. Использование: / и текст, которые Вы задали в скобках. Не работает с пробелом",
+      "value": "start"
     }
   },
   "buildpacks": [
